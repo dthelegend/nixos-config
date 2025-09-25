@@ -262,7 +262,7 @@ in {
     xdg = {
       enable = true;
       desktopEntries = {
-        ungoogled-chromium.noDisplay = true;
+        ungoogled-chromium = { name = ""; noDisplay = true; };
       };
       autostart = {
         enable = true;
