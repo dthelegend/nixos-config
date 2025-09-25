@@ -251,6 +251,10 @@ in {
           origin = "cosmic";
 	  appId = "io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager";
 	}
+	{
+	  origin = "flathub";
+	  appId = "io.github.ungoogled_software.ungoogled_chromium";
+	}
       ];
       enable = true;
     };
@@ -258,6 +262,7 @@ in {
     xdg = {
       enable = true;
       desktopEntries = {
+        ungoogled-chromium.noDisplay = true;
       };
       autostart = {
         enable = true;
