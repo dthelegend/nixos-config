@@ -1,0 +1,8 @@
+[submodule "aux/home-manager"]
+	path = aux/home-manager
+	url = git@github.com:nix-community/home-manager.git
+	branch = master
+[submodule "aux/nix-flatpak"]
+	path = aux/nix-flatpak
+	url = git@github.com:gmodena/nix-flatpak.git
+	branch = main

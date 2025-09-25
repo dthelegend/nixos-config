@@ -106,7 +106,7 @@
     };
     enable = false;
   };
-  
+
   systemd.services.initialise_rgb = let
     colour = "red";
     openrgb_config = ./apps/openrgb/config;
@@ -122,6 +122,9 @@
 
   # firmware updates
   services.fwupd.enable = true;
+
+  # SSH Agent
+  services.gnome.gnome-keyring.enable = true;
 
   # Automount disks
   services.udisks2.enable = true;
@@ -176,6 +179,7 @@
 	# Desktop Environment
         alacritty
 	wl-clipboard
+	seahorse
 
 	# Flatpak
 	flatpak
@@ -187,6 +191,16 @@
       enable = true;
       userName = "Daudi Wampamba";
       userEmail = "me@daudi,dev";
+      config = {
+      	credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+      };
+      extraConfig = {
+        init.defaultBranch = "main";
+        safe.directory = "/etc/nixos";
+        safe.directory = "/home/daudi/.dotfiles";
+      };
     };
 
     # Udisk automount support
