@@ -3,18 +3,17 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
-{
-  let
-    nix-flatpak = "./aux/nix-flatpak";
-    home-manager = "./aux/home-manager"
-  in imports = [
+let
+    nix-flatpak = ./aux/nix-flatpak;
+    home-manager = ./aux/home-manager;
+in {
+  
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # Fetch nix-flatpak and home-manager
-    "${home-manager}/nixos.nix"
+    "${home-manager}/nixos"
     "${nix-flatpak}/modules/nixos.nix"
-    "${nix-flatpak}/modules/home-manager.nix"
   ];
 
   # Package Overrides
@@ -169,9 +168,13 @@
     };
     defaultUserShell = pkgs.fish;
   };
-
+  
   home-manager.useUserPackages = true;
   home-manager.users.daudi = { pkgs, lib, ... }: {
+    imports = [
+      "${nix-flatpak}/modules/home-manager.nix"
+    ];
+
     home.packages = with pkgs; [
         # Hardware
 	udiskie
@@ -191,15 +194,12 @@
       enable = true;
       userName = "Daudi Wampamba";
       userEmail = "me@daudi,dev";
-      config = {
+      extraConfig = {
       	credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
-      };
-      extraConfig = {
         init.defaultBranch = "main";
-        safe.directory = "/etc/nixos";
-        safe.directory = "/home/daudi/.dotfiles";
+        safe.directory = "*";
       };
     };
 
@@ -235,7 +235,24 @@
 	  origin = "flathub";
           appId = "com.valvesoftware.Steam";
 	}
+	{
+	  origin = "flathub";
+          appId = "com.discordapp.Discord";
+	} 
+        {
+	  origin = "flathub";
+          appId = "app.zen_browser.zen";
+	}
+	{
+	  origin = "flathub";
+          appId = "org.freedesktop.Platform.VulkanLayer.gamescope";
+	}
+	{
+          origin = "cosmic";
+	  appId = "io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager";
+	}
       ];
+      enable = true;
     };
     
     xdg = {
@@ -266,9 +283,6 @@
     # tty
     fish
     neovim
-
-    # Home Management
-    home-manager
   ];
 
   # YOU DONT NEED SUDO. RUN0 FOREVER
@@ -367,7 +381,7 @@
   ];
   services.desktopManager.cosmic.showExcludedPkgsWarning = false;
 
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small/"
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small/";
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
