@@ -37,6 +37,13 @@ in {
       version = "1.0rc2";
     });
     })
+    (final: prev: {
+    cosmic-session = prev.cosmic-session.overrideAttrs (old: {
+      patches = [
+        ./apps/cosmic-session/fix_gcr_ssh_agent_compat.patch
+      ];
+    });
+    })
   ];
 
   # Bootloader.
@@ -46,7 +53,7 @@ in {
     loader = {
       systemd-boot = {
         enable = true;
-	consoleMode = "max";
+	consoleMode = "keep";
       };
       efi.canTouchEfiVariables = true;
       timeout = 0;
@@ -58,6 +65,8 @@ in {
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
+      "nvidia_drm.fbdev=1"
+      "video=efifb:5120x2160"
     ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
@@ -65,6 +74,9 @@ in {
     initrd.verbose = false;
     plymouth = {
       enable = true;
+      extraConfig = ''
+      DeviceScale = 1
+      '';
       theme = "black_hud";
       themePackages = with pkgs; [
         (adi1090x-plymouth-themes.override {
@@ -176,16 +188,16 @@ in {
     ];
 
     home.packages = with pkgs; [
-        # Hardware
-	udiskie
-	
-	# Desktop Environment
-        alacritty
-	wl-clipboard
-	seahorse
+      # Hardware
+      udiskie
 
-	# Flatpak
-	flatpak
+      # Desktop Environment
+      wl-clipboard
+      seahorse
+      blueman
+
+      # Flatpak
+      flatpak
     ];
 
     programs.home-manager.enable = true;
@@ -223,11 +235,15 @@ in {
       remotes = [
         {
 	  name = "flathub";
-	  location = "https://gl.flathub.org/repo/";
+	  location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+	}
+	{
+	  name = "flathub-beta";
+	  location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
 	}
         {
 	  name = "cosmic";
-	  location = "https://apt.pop-os.org/cosmic/";
+	  location = "https://apt.pop-os.org/cosmic/cosmic.flatpakrepo";
 	}
       ];
       packages = [
@@ -245,36 +261,73 @@ in {
 	}
 	{
 	  origin = "flathub";
-          appId = "org.freedesktop.Platform.VulkanLayer.gamescope";
+          appId = "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08";
 	}
-	{
-          origin = "cosmic";
-	  appId = "io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager";
+        {
+	  origin = "flathub";
+          appId = "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08";
 	}
 	{
 	  origin = "flathub";
 	  appId = "io.github.ungoogled_software.ungoogled_chromium";
 	}
+	{
+	  origin = "flathub-beta";
+	  appId = "net.lutris.Lutris";
+	}
       ];
       enable = true;
+      uninstallUnmanaged = true;
+      update.onActivation = true;
     };
-    
+
     xdg = {
       enable = true;
       desktopEntries = {
-        ungoogled-chromium = { name = ""; noDisplay = true; };
+        via = {
+          name = "Via";
+          genericName = "Keyboard configuration software";
+          exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://usevia.app/"'';
+          terminal = false;
+          categories = [ "Application" ];
+        };
+	fractal-adjust = {
+          name = "Fractal Adjust";
+          genericName = "Headphone configuration software";
+          exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://adjust.fractal-design.com/"'';
+          terminal = false;
+          categories = [ "Application" ];
+        };
+        "io.github.ungoogled_software.ungoogled_chromium" = {
+          name = "Ungoogled Chromium (disabled)";
+	  noDisplay = true;
+	};
       };
       autostart = {
         enable = true;
         readOnly = true;
         entries = [];
       };
+      portal = {
+        enable = true;
+	extraPortals = [ pkgs.xdg-desktop-portal-cosmic ];
+	configPackages = [ pkgs.xdg-desktop-portal-cosmic ];
+	xdgOpenUsePortal = true;
+	config = {
+	  cosmic = {};
+	};
+      };
     };
-  
+
+    systemd.user.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/gcr/ssh";
+
     # The state version is required and should stay at the version you
     # originally installed.
     home.stateVersion = "25.05";
   };
+  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
+
+  hardware.keyboard.qmk.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -305,7 +358,7 @@ in {
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = true;
+    enable = false;
     ports = [ 22 ]; 
     settings = {
       PasswordAuthentication = true;
@@ -379,13 +432,14 @@ in {
   services.displayManager.cosmic-greeter.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
-    cosmic-term
     cosmic-edit
     cosmic-store
     cosmic-files
+    cosmic-player
   ];
+  services.displayManager.sessionPackages = []; 
   services.desktopManager.cosmic.showExcludedPkgsWarning = false;
-
+ 
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small/";
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -1,0 +1,18 @@
+diff --git a/data/start-cosmic b/data/start-cosmic
+index 726b4ee..1925c90 100755
+--- a/data/start-cosmic
++++ b/data/start-cosmic
+@@ -53,9 +53,11 @@ if [ -d "/run/user/$(id -u)/keyring" ]; then
+     else
+         echo "gnome-keyring-daemon not found in PATH" >&2
+     fi
++fi
+ 
+-    # Set SSH_AUTH_SOCK to the standard gnome-keyring socket
+-    export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
++if [ -d "/run/user/$(id -u)/gcr" ]; then
++    # Set SSH_AUTH_SOCK to the standard gcr-ssh-agent socket
++    export SSH_AUTH_SOCK="/run/user/$(id -u)/gcr/ssh"
+ fi
+ 
+ # Run cosmic-session
