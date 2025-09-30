@@ -27,7 +27,7 @@ in {
         sha256 = "vdIA9i1ewcrfX5U7FkcRR+ISdH5uRi9fz9YU5IkPKJQ=";
       };
       patches = [
-        ./apps/openrgb/remove_systemd_service.patch
+        ./apps/openrgb/patches/remove_systemd_service.patch
       ];
       postPatch = ''
         patchShebangs scripts/build-udev-rules.sh
@@ -40,7 +40,7 @@ in {
     (final: prev: {
     cosmic-session = prev.cosmic-session.overrideAttrs (old: {
       patches = [
-        ./apps/cosmic-session/fix_gcr_ssh_agent_compat.patch
+        ./apps/cosmic-session/patches/fix_gcr_ssh_agent_compat.patch
       ];
     });
     })
@@ -182,6 +182,7 @@ in {
   };
   
   home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
   home-manager.users.daudi = { pkgs, lib, ... }: {
     imports = [
       "${nix-flatpak}/modules/home-manager.nix"
@@ -199,8 +200,17 @@ in {
       # Flatpak
       flatpak
     ];
-
-    programs.home-manager.enable = true;
+    
+    home.sessionVariables = {
+      SSH_ASKPASS = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+      SSH_ASKPASS_REQUIRE = "prefer";
+    };
+    
+    home.shell.enableFishIntegration = true;
+    
+    programs.fish = {
+      enable = true;
+    };
 
     programs.git = {
       enable = true;
@@ -308,24 +318,12 @@ in {
         readOnly = true;
         entries = [];
       };
-      portal = {
-        enable = true;
-	extraPortals = [ pkgs.xdg-desktop-portal-cosmic ];
-	configPackages = [ pkgs.xdg-desktop-portal-cosmic ];
-	xdgOpenUsePortal = true;
-	config = {
-	  cosmic = {};
-	};
-      };
     };
-
-    systemd.user.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/gcr/ssh";
 
     # The state version is required and should stay at the version you
     # originally installed.
     home.stateVersion = "25.05";
   };
-  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 
   hardware.keyboard.qmk.enable = true;
 
