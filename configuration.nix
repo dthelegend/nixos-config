@@ -195,10 +195,12 @@ in {
       # Desktop Environment
       wl-clipboard
       seahorse
-      blueman
 
       # Flatpak
       flatpak
+
+      # Misc
+      prismlauncher
     ];
     
     home.sessionVariables = {
@@ -339,6 +341,7 @@ in {
     # tty
     fish
     neovim
+    file
   ];
 
   # YOU DONT NEED SUDO. RUN0 FOREVER
