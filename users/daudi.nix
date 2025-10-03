@@ -29,9 +29,7 @@ in
     };
 
     imports = [
-      lib.mkIf
-      cfg.graphical
-      (
+      (lib.mkIf cfg.graphical (
         {
           config,
           pkgs,
@@ -207,7 +205,7 @@ in
           services.displayManager.sessionPackages = [ ];
           services.desktopManager.cosmic.showExcludedPkgsWarning = false;
         }
-      )
+      ))
     ];
   };
 }
