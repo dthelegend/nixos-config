@@ -1,8 +1,8 @@
 let
   options = {
-    ssh-support = ./ssh_support.nix;
-    default-system = ./default_system.nix;
-    nix-config = ./nix_config.nix;
+    ssh-support = ./ssh-support.nix;
+    default-system = ./default-system.nix;
+    nix-config = ./nix-config.nix;
   };
 in
 {
