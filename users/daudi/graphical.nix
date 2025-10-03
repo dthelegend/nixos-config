@@ -19,8 +19,6 @@ in
       variant = "";
     };
 
-    home-manager.useUserPackages = true;
-    home-manager.useGlobalPkgs = true;
     home-manager.users.daudi =
       { pkgs, lib, ... }:
       {
