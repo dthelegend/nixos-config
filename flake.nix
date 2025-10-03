@@ -32,6 +32,7 @@
             hosts.cambridge
             home-manager.nixosModules.home-manager
             nix-flatpak.nixosModules.nix-flatpak
+            homeManagerModules.nix-flatpak
             users.daudi
             (
               { ... }:
