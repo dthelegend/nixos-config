@@ -7,9 +7,10 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
+      url = "github:gmodena/nix-flatpak/?ref=latest";
     };
   };
 
@@ -17,6 +18,8 @@
     {
       self,
       nixpkgs,
+      home-manager,
+      nix-flatpak,
       ...
     }:
     with (import ./.);
@@ -27,6 +30,8 @@
           modules = [
             hosts.defaults
             hosts.cambridge
+            home-manager.nixosModules.home-manager
+            nix-flatpak.nixosModules.nix-flatpak
             users.daudi
             (
               { ... }:
