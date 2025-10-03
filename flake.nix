@@ -37,7 +37,6 @@
               home-manager.extraSpecialArgs.flake-inputs = inputs;
               home-manager.users.daudi.imports = [
                 flatpaks.homeManagerModules.nix-flatpak
-                ./flatpak.nix
               ];
             }
             nix-flatpak.nixosModules.nix-flatpak
