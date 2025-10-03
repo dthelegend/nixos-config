@@ -8,6 +8,8 @@
 {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
+    connectivity.nix
+    mc-server.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
