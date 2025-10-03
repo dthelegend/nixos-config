@@ -28,6 +28,7 @@
         cambridge = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            apps
             hosts.defaults
             hosts.cambridge
             home-manager.nixosModules.home-manager
@@ -42,7 +43,7 @@
             nix-flatpak.nixosModules.nix-flatpak
             users.daudi
             (
-              { ... }:
+              { ..., inputs }:
               {
                 users.daudi.graphical = true;
               }
@@ -54,7 +55,7 @@
           modules = [
             hosts.defaults
             hosts.minecraft-server
-            users.daudi-tty
+            users.daudi
           ];
         };
       };
