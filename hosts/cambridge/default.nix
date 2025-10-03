@@ -12,7 +12,7 @@
     ./connectivity.nix
     ./graphics.nix
     ./hardware-configuration.nix
-    ./rgb.nix
+    ./rgb
     ./tty.nix
   ];
 

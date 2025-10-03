@@ -31,7 +31,7 @@
   systemd.services.initialise_rgb =
     let
       colour = "red";
-      openrgb_config = ./apps/openrgb/config;
+      openrgb_config = ./config;
     in
     {
       wantedBy = [ "multi-user.target" ];
