@@ -13,16 +13,14 @@
       url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    root = (import ./.);
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      root,
     }:
-    with root;
+    with (import ./.);
     {
       nixosConfigurations = {
         cambridge = nixpkgs.lib.nixosSystem {
