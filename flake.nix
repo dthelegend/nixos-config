@@ -28,7 +28,7 @@
         cambridge = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            apps
+            overlays
             hosts.defaults
             hosts.cambridge
             home-manager.nixosModules.home-manager
