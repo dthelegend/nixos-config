@@ -28,9 +28,13 @@
             hosts.defaults
             hosts.cambridge
             users.daudi
+            (
+              { ... }:
+              {
+                users.daudi.graphical = true;
+              }
+            )
           ];
-
-          users.daudi.graphical = true;
         };
         minecraft-server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
