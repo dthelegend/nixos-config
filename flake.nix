@@ -43,7 +43,7 @@
             nix-flatpak.nixosModules.nix-flatpak
             users.daudi
             (
-              { ..., inputs }:
+              { ... }:
               {
                 users.daudi.graphical = true;
               }
