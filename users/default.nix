@@ -1,3 +1,3 @@
 {
-  daudi = import ./daudi.nix;
+  daudi = import ./daudi;
 }
