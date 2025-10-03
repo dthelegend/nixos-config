@@ -1,5 +1,5 @@
 {
-  apps = import ./overlays;
+  overlays = import ./overlays;
   hosts = import ./hosts;
   users = import ./users;
 }
