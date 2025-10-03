@@ -50,10 +50,6 @@ in
         home-manager.users.daudi =
           { pkgs, lib, ... }:
           {
-            imports = [
-              "${nix-flatpak}/modules/home-manager.nix"
-            ];
-
             home.packages = with pkgs; [
               # Hardware
               udiskie
