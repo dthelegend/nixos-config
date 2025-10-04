@@ -27,7 +27,7 @@ in
         package = pkgs.vanillaServers.vanilla-1_20_1.overrideAttrs (
           final: prev:
           let
-            jre = final.jdk17;
+            jre = prev.jdk17;
           in
           {
             installPhase = prev.installPhase + ''
