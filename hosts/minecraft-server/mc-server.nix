@@ -7,7 +7,7 @@
   ...
 }:
 let
-  minecraft-verison = "1.20.1";
+  minecraft-version = "1.20.1";
   forge-version = "47.4.0";
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/Majonez57/MunchCraft/raw/0.0.5-alpha/pack.toml";
@@ -27,9 +27,11 @@ in
     enable = true;
     eula = true;
     servers = {
-      munchcraft = {
+      munchcraft = let
+        minecraft-version-fixed = (lib.strings.concatStringsSep "_" (lib.versions.splitVersion minecraft-version));
+      in {
         enable = true;
-        package = pkgs.vanillaServers."vanilla-${minecraft-version}".overrideAttrs (
+        package = pkgs.vanillaServers."vanilla-${minecraft-version-fixed}".overrideAttrs (
           final: prev:
           let
             jre = pkgs.jdk17;
