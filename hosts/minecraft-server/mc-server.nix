@@ -12,7 +12,7 @@ let
     packHash = "sha256-175qWQJaW0io4dkTgFar6Ih70EAY7xVkLghBKZmQueU=";
   };
   forge-installer = pkgs.fetchurl {
-    url = "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.3.33/forge-1.20.1-47.3.33-installer.jar";
+    url = "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.0/forge-1.20.1-47.4.0-installer.jar";
     hash = "sha256-s7SlV2eYM3sABLS1hFzBGq6goCkRa/We2bpCK5nLsmU=";
   };
 in
