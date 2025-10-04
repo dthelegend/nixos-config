@@ -25,4 +25,5 @@
 
   # YOU DONT NEED SUDO. RUN0 FOREVER
   security.sudo.enable = false;
+  security.polkit.enable = true;
 }

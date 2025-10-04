@@ -8,7 +8,7 @@
 
 {
   networking = {
-    hostName = "minecraft";
+    hostName = "minecraft-server";
     interfaces = {
       "eth0".ipv4.addresses = [
         {
