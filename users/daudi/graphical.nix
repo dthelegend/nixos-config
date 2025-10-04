@@ -22,6 +22,7 @@ in
       home-manager.users.daudi.imports = [
         nix-flatpak.homeManagerModules.nix-flatpak
       ];
+      home-manager.home.stateVersion = "25.05";
     }
     nix-flatpak.nixosModules.nix-flatpak
   ];
@@ -170,7 +171,6 @@ in
 
         # The state version is required and should stay at the version you
         # originally installed.
-        home.stateVersion = "25.05";
       };
 
     # Automount disks
