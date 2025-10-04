@@ -9,10 +9,12 @@
 let
   minecraft-version = "1.20.1";
   forge-version = "47.4.0";
+  
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/Majonez57/MunchCraft/raw/1c861a04363fd051881fb28f9ef91c142026e352/pack.toml";
-    packHash = "sha256-IYXU2R1YwtA/W8Wa5AdEz528gXZx9RfyWYq4kNyTTxY=";
+    url = "https://github.com/Majonez57/MunchCraft/raw/0.0.6-alpha/pack.toml";
+    packHash = "sha256-cTfrNtbYqzc0YdDmRHCC/5XDu9qxHCZjLOQh7IgyEYw=";
   };
+
   forge-installer = pkgs.fetchurl {
     url = "https://maven.minecraftforge.net/net/minecraftforge/forge/${minecraft-version}-${forge-version}/forge-${minecraft-version}-${forge-version}-installer.jar";
     hash = "sha256-8/V0ZeLL3DKBk/d7p/DJTLZEBfMe1VZ1PZJ16L3Abiw=";
@@ -59,9 +61,13 @@ in
           difficulty = 3;
           gamemode = 1;
           motd = "It's declarative as f**k!";
-          white-list = true;
+          white-list = false;
           allow-cheats = true;
         };
+
+	operators = {
+	  DTheLegend = "602b1408-6464-453f-a79e-18372981700c";
+	};
 
         jvmOpts = "-Xms2G -Xmx8G";
       };
