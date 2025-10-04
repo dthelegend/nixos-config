@@ -22,7 +22,7 @@ in
       home-manager.users.daudi.imports = [
         nix-flatpak.homeManagerModules.nix-flatpak
       ];
-      home-manager.home.stateVersion = "25.05";
+      home-manager.users.daudi.home.stateVersion = "25.05";
     }
     nix-flatpak.nixosModules.nix-flatpak
   ];
