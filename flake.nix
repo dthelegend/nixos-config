@@ -27,7 +27,7 @@
       nixosConfigurations = {
         cambridge = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          extraSpecialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; };
           modules = [
             overlays
             hosts.defaults
@@ -40,7 +40,7 @@
         };
         minecraft-server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          extraSpecialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; };
           modules = [
             hosts.defaults
             hosts.minecraft-server
