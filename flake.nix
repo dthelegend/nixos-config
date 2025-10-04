@@ -31,16 +31,6 @@
             overlays
             hosts.defaults
             hosts.cambridge
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs.flake-inputs = inputs;
-              home-manager.users.daudi.imports = [
-                nix-flatpak.homeManagerModules.nix-flatpak
-              ];
-            }
-            nix-flatpak.nixosModules.nix-flatpak
             users.daudi
             (
               { ... }:

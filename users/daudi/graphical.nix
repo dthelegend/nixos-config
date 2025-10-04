@@ -12,6 +12,19 @@ in
     graphical = lib.mkEnableOption "Enable graphical features";
   };
 
+  imports = [
+    home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs.flake-inputs = inputs;
+      home-manager.users.daudi.imports = [
+        nix-flatpak.homeManagerModules.nix-flatpak
+      ];
+    }
+    nix-flatpak.nixosModules.nix-flatpak
+  ];
+
   config = lib.mkIf graphical_enabled {
     # Configure keymap in X11
     services.xserver.xkb = {
