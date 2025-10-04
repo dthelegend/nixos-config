@@ -34,7 +34,7 @@ in
           in
           {
             installPhase = prev.installPhase + ''
-                            mv $out/lib/minecraft/server.jar s $out/lib/minecraft/server-${prev.version}.jar 
+                            mv $out/lib/minecraft/server.jar $out/lib/minecraft/server-${prev.version}.jar 
 
                             cat > $out/bin/minecraft-server << EOF
               	        #!/bin/sh
