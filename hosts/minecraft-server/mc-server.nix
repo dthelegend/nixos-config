@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -13,19 +14,23 @@ let
   forge-installer = pkgs.fetchurl "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.3.33/forge-1.20.1-47.3.33-installer.jar";
 in
 {
+  imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
+
+  nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
+
   services.minecraft-servers.munchcraft = {
     enable = true;
     eula = true;
     package = pkgs.vanillaServers.vanilla-1_20_1.overrideAttrs (
       final: prev: {
         preFixupPhase = prev.preFixupPhase + ''
-          	    cat > $out/bin/minecraft-server << EOF
-                      #!/bin/sh
-              	    exec ${prev.packager.jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
-                      EOF
-          	    
-          	    java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
-          	'';
+          cat > $out/bin/minecraft-server << EOF
+          #!/bin/sh
+          exec ${prev.packager.jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
+          EOF
+
+          java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
+        '';
       }
     );
     declarative = true;

@@ -27,27 +27,15 @@
       nixosConfigurations = {
         cambridge = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             overlays
             hosts.defaults
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs.flake-inputs = inputs;
-              home-manager.users.daudi.imports = [
-                nix-flatpak.homeManagerModules.nix-flatpak
-              ];
-            }
-            nix-flatpak.nixosModules.nix-flatpak
             hosts.cambridge
             users.daudi
-            (
-              { ... }:
-              {
-                users.daudi.graphical = true;
-              }
-            )
+            {
+              users.daudi.graphical = true;
+            }
           ];
         };
         minecraft-server = nixpkgs.lib.nixosSystem {
