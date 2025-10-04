@@ -30,6 +30,16 @@
           modules = [
             overlays
             hosts.defaults
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.users.daudi.imports = [
+                nix-flatpak.homeManagerModules.nix-flatpak
+              ];
+            }
+            nix-flatpak.nixosModules.nix-flatpak
             hosts.cambridge
             users.daudi
             (
@@ -45,6 +55,7 @@
           modules = [
             hosts.defaults
             hosts.minecraft-server
+            home-manager.nixosModules.home-manager
             users.daudi
           ];
         };
