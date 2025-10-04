@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 let
@@ -12,7 +13,7 @@ in
     graphical = lib.mkEnableOption "Enable graphical features";
   };
 
-  imports = [
+  imports = with inputs; [
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
