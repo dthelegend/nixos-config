@@ -38,8 +38,10 @@ in
               #!/bin/sh
               exec ${jre}/bin/java \$@ -jar $out/lib/minecraft/forge.jar nogui
               EOF
-
-              ${jre}/bin/java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
+	      
+	      pushd $out/lib
+              ${jre}/bin/java -jar ${forge-installer} --installServer
+	      popd
             '';
           }
         );
