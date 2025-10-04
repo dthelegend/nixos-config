@@ -34,15 +34,15 @@ in
           in
           {
             installPhase = prev.installPhase + ''
-              	      pushd $out/lib/minecraft
-              	      mv server.jar server-${prev.version}.jar
-                            ${jre}/bin/java -jar ${forge-installer} --installServer
-              	      popd
+              pushd $out/lib/minecraft
+              mv server.jar server-${prev.version}.jar 
+              popd
 
-                            cat > $out/bin/minecraft-server << EOF
-                            #!/bin/sh
-                            exec ${jre}/bin/java \$@ -jar $out/lib/minecraft/forge.jar nogui
-                            EOF
+              cat > $out/bin/minecraft-server << EOF
+	        #!/bin/sh
+		${jre}/bin/java -jar ${forge-installer} --installServer
+		exec ${jre}/bin/java \$@ -jar $out/lib/minecraft/forge.jar nogui
+		EOF
             '';
           }
         );
