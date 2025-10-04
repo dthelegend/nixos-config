@@ -1,19 +1,19 @@
 let
-  options = {
+  mixins = {
     ssh-support = ./ssh-support.nix;
     default-system = ./default-system.nix;
     nix-config = ./nix-config.nix;
   };
 in
 {
-  inherit options;
+  inherit mixins;
 
-  defaults = (
+  default_mixins = (
     {
       ...
     }:
     {
-      imports = with options; [
+      imports = with mixins; [
         default-system
         nix-config
       ];

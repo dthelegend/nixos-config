@@ -21,6 +21,8 @@
     file
   ];
 
+  programs.fish.enable = true;
+
   # YOU DONT NEED SUDO. RUN0 FOREVER
   security.sudo.enable = false;
 }

@@ -33,7 +33,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             overlays
-            hosts.defaults
+            hosts.default_mixins
             hosts.cambridge
             users.daudi
             {
@@ -45,7 +45,9 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            hosts.defaults
+            hosts.default_mixins
+            hosts.mixins.ssh-support
+            hosts.
             hosts.minecraft-server
             home-manager.nixosModules.home-manager
             users.daudi

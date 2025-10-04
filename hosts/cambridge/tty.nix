@@ -22,8 +22,6 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  programs.fish.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/London";
 }
