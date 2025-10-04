@@ -9,7 +9,7 @@
 let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/Majonez57/MunchCraft/raw/0.0.5-alpha/pack.toml";
-    packHash = "sha256-L5RiSktqtSQBDecVfGj1iDaXV+E90zrNEcf4jtsg+wk=";
+    packHash = "sha256-V1c/EdX0hdZCJTVyoGlLf1Q7w4gImEvQ4xcVyJPJaZo=";
   };
   forge-installer = pkgs.fetchurl {
     url = "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.3.33/forge-1.20.1-47.3.33-installer.jar";
