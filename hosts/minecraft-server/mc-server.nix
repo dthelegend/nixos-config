@@ -21,7 +21,7 @@ in
         preFixupPhase = prev.preFixupPhase + ''
           	    cat > $out/bin/minecraft-server << EOF
                       #!/bin/sh
-              	    exec ${jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
+              	    exec ${prev.packager.jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
                       EOF
           	    
           	    java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
