@@ -26,7 +26,7 @@ in
         enable = true;
         package = pkgs.vanillaServers.vanilla-1_20_1.overrideAttrs (
           final: prev: {
-            preFixupPhase = prev.preFixupPhase + ''
+            preFixupPhase = (prev.preFixupPhase ? "") + ''
               cat > $out/bin/minecraft-server << EOF
               #!/bin/sh
               exec ${prev.packages.jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
