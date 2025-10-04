@@ -40,8 +40,8 @@ in
 
               cat > $out/bin/minecraft-server << EOF
 	        #!/bin/sh
-		${jre}/bin/java -jar ${forge-installer} --installServer
-		exec ${jre}/bin/java \$@ -jar $out/lib/minecraft/forge.jar nogui
+		${jre}/bin/java -jar ${forge-installer} --installServer || true
+		exec @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.33/unix_args.txt \$@ nogui
 		EOF
             '';
           }
