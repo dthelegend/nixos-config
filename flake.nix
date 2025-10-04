@@ -40,6 +40,7 @@
         };
         minecraft-server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             hosts.defaults
             hosts.minecraft-server
