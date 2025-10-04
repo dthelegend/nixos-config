@@ -36,7 +36,7 @@ in
             '';
           }
         );
-        declarative = true;
+
         symlinks = {
           "mods" = "${modpack}/mods";
         };
