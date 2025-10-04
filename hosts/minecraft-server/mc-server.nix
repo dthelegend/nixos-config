@@ -34,7 +34,7 @@ in
           in
           {
             installPhase = prev.installPhase + ''
-              	      pushd $out/lib
+              	      pushd $out/lib/minecraft
               	      mv server.jar server-${prev.version}.jar
                             ${jre}/bin/java -jar ${forge-installer} --installServer
               	      popd
