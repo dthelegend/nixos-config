@@ -25,14 +25,18 @@ in
       munchcraft = {
         enable = true;
         package = pkgs.vanillaServers.vanilla-1_20_1.overrideAttrs (
-          final: prev: {
+          final: prev:
+          let
+            jre = final.jdk17;
+          in
+          {
             installPhase = prev.installPhase + ''
               cat > $out/bin/minecraft-server << EOF
               #!/bin/sh
-              exec ${prev.packages.jre_headless}/bin/java \$@ -jar $out/lib/minecraft/server.jar nogui
+              exec ${jre}/bin/java \$@ -jar $out/lib/minecraft/forge.jar nogui
               EOF
 
-              java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
+              ${jre}/bin/java -Duser.dir=$out/lib -jar ${forge-installer} --installServer
             '';
           }
         );
