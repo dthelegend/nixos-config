@@ -47,7 +47,6 @@
           modules = [
             hosts.default_mixins
             hosts.mixins.ssh-support
-            hosts.
             hosts.minecraft-server
             home-manager.nixosModules.home-manager
             users.daudi
