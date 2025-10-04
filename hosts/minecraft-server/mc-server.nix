@@ -18,7 +18,7 @@ in
 
   nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
 
-  services.minecraft-servers.munchcraft = {
+  services.minecraft-servers.servers.munchcraft = {
     enable = true;
     eula = true;
     package = pkgs.vanillaServers.vanilla-1_20_1.overrideAttrs (
