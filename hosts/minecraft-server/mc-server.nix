@@ -10,8 +10,8 @@ let
   minecraft-version = "1.20.1";
   forge-version = "47.4.0";
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/Majonez57/MunchCraft/raw/0.0.5-alpha/pack.toml";
-    packHash = "sha256-175qWQJaW0io4dkTgFar6Ih70EAY7xVkLghBKZmQueU=";
+    url = "https://github.com/Majonez57/MunchCraft/raw/1c861a04363fd051881fb28f9ef91c142026e352/pack.toml";
+    packHash = "sha256-IYXU2R1YwtA/W8Wa5AdEz528gXZx9RfyWYq4kNyTTxY=";
   };
   forge-installer = pkgs.fetchurl {
     url = "https://maven.minecraftforge.net/net/minecraftforge/forge/${minecraft-version}-${forge-version}/forge-${minecraft-version}-${forge-version}-installer.jar";
