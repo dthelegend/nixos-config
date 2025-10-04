@@ -8,7 +8,7 @@
 }:
 let
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/Majonez57/MunchCraft/raw/0.4.5-alpha/pack.toml";
+    url = "https://github.com/Majonez57/MunchCraft/raw/0.0.5-alpha/pack.toml";
     packHash = "";
   };
   forge-installer = pkgs.fetchurl {
