@@ -34,15 +34,14 @@ in
           in
           {
             installPhase = prev.installPhase + ''
-              pushd $out/lib/minecraft
-              mv server.jar server-${prev.version}.jar 
-              popd
+                            mv $out/lib/minecraft/server.jar s $out/lib/minecraft/server-${prev.version}.jar 
 
-              cat > $out/bin/minecraft-server << EOF
-	        #!/bin/sh
-		${jre}/bin/java -jar ${forge-installer} --installServer || true
-		exec ${jre}/bin/java \$@ @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.33/unix_args.txt nogui
-		EOF
+                            cat > $out/bin/minecraft-server << EOF
+              	        #!/bin/sh
+              		${jre}/bin/java -jar ${forge-installer} --installServer || true
+              		echo "\$@" > user_jvm_args.txt
+              		exec ${jre}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.33/unix_args.txt nogui
+              		EOF
             '';
           }
         );
