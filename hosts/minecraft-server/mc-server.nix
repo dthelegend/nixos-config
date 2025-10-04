@@ -41,7 +41,7 @@ in
               cat > $out/bin/minecraft-server << EOF
 	        #!/bin/sh
 		${jre}/bin/java -jar ${forge-installer} --installServer || true
-		exec @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.33/unix_args.txt \$@ nogui
+		exec ${jre}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.33/unix_args.txt \$@ nogui
 		EOF
             '';
           }
