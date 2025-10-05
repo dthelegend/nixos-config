@@ -134,6 +134,10 @@ in
               origin = "flathub-beta";
               appId = "net.lutris.Lutris";
             }
+            {
+              origin = "flathub";
+              appId = "com.spotify.Client";
+            }
           ];
           enable = true;
           uninstallUnmanaged = true;
