@@ -69,8 +69,8 @@ in
             region-file-compression = "lz4";
 
             # Microsoft Spyware
-            enforce-secure-profile = false;
-            online-mode = false;
+            enforce-secure-profile = true;
+            online-mode = true;
 
             # Gameplay
             difficulty = 2;
@@ -81,7 +81,7 @@ in
 
             # World
             level-name = "munchcraft-prime";
-            level-seed = "munchingrn";
+            level-seed = "munching";
           };
 
           operators = {
