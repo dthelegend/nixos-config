@@ -11,8 +11,8 @@ let
   forge-version = "47.4.0";
   
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/Majonez57/MunchCraft/raw/0.0.6-alpha/pack.toml";
-    packHash = "sha256-cTfrNtbYqzc0YdDmRHCC/5XDu9qxHCZjLOQh7IgyEYw=";
+    url = "https://github.com/Majonez57/MunchCraft/raw/0.0.7-alpha/pack.toml";
+    packHash = "sha256-IKEbRLrwKNgZpwKQoOeeYXS1gkZB4/qX7QnM+aDSzjE=";
   };
 
   forge-installer = pkgs.fetchurl {
@@ -63,13 +63,14 @@ in
           motd = "It's declarative as f**k!";
           white-list = false;
           allow-cheats = true;
+	  seed = "munchingrn";
         };
 
 	operators = {
 	  DTheLegend = "602b1408-6464-453f-a79e-18372981700c";
 	};
 
-        jvmOpts = "-Xms2G -Xmx8G";
+        jvmOpts = "-Xms2G -Xmx16G";
       };
     };
   };
