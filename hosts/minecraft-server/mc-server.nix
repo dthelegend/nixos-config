@@ -58,12 +58,26 @@ in
 
         openFirewall = true;
         serverProperties = {
-          difficulty = 3;
-          gamemode = 1;
+	  # Server Admin
           motd = "It's declarative as f**k!";
           white-list = false;
-          allow-cheats = true;
-	  seed = "munchingrn";
+	  network-compression-threshold = 1400;
+	  region-file-compression = "lz4";
+
+	  # Microsoft Spyware
+	  enforce-secure-profile = false;
+	  online-mode = false;
+          
+	  # Gameplay
+	  difficulty = 2;
+          gamemode = 0;
+	  force-gamemode = true;
+          allow-cheats = false;
+	  allow-flying = true;
+
+	  # World
+	  level-name = "munchcraft-prime";
+	  level-seed = "munchingrn";
         };
 
 	operators = {
