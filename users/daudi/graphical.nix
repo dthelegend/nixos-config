@@ -13,6 +13,9 @@ in
     graphical = lib.mkEnableOption "Enable graphical features";
   };
 
+  # Required to get epic games to work
+  hardware.graphics.enable32Bit = true;
+
   imports = with inputs; [
     home-manager.nixosModules.home-manager
     {
@@ -58,6 +61,13 @@ in
 
           # Misc
           prismlauncher
+
+	  # Gaming
+	  (lutris.override {
+            extraPkgs = pkgs: [
+              # List package dependencies here
+            ];
+          })
         ];
 
         home.sessionVariables = {
@@ -124,19 +134,7 @@ in
             }
             {
               origin = "flathub";
-              appId = "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08";
-            }
-            {
-              origin = "flathub";
-              appId = "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08";
-            }
-            {
-              origin = "flathub";
               appId = "io.github.ungoogled_software.ungoogled_chromium";
-            }
-            {
-              origin = "flathub-beta";
-              appId = "net.lutris.Lutris";
             }
             {
               origin = "flathub";
@@ -154,6 +152,7 @@ in
             via = {
               name = "Via";
               genericName = "Keyboard configuration software";
+	      deacription = "Adjust keyboard mappings, macros, and settings"
               exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://usevia.app/"'';
               terminal = false;
               categories = [ "Application" ];
@@ -161,7 +160,16 @@ in
             fractal-adjust = {
               name = "Fractal Adjust";
               genericName = "Headphone configuration software";
+	      description = "Adjust Headphone settings"
               exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://adjust.fractal-design.com/"'';
+              terminal = false;
+              categories = [ "Application" ];
+            };
+	    keychron = {
+	      name = "Keychron Launcher";
+	      genericName = "Mouse configuration software";
+	      description = "Adjust mouse settings"
+              exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://launcher.keychron.com/"'';
               terminal = false;
               categories = [ "Application" ];
             };
