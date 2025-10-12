@@ -13,9 +13,6 @@ in
     graphical = lib.mkEnableOption "Enable graphical features";
   };
 
-  # Required to get epic games to work
-  hardware.graphics.enable32Bit = true;
-
   imports = with inputs; [
     home-manager.nixosModules.home-manager
     {
@@ -44,6 +41,9 @@ in
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       gamescopeSession.enable = true;
     };
+
+    # Required to get epic games to work
+    hardware.graphics.enable32Bit = true;
 
     home-manager.users.daudi =
       { pkgs, lib, ... }:
