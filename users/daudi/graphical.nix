@@ -116,10 +116,6 @@ in
           packages = [
             {
               origin = "flathub";
-              appId = "com.valvesoftware.Steam";
-            }
-            {
-              origin = "flathub";
               appId = "com.discordapp.Discord";
             }
             {
