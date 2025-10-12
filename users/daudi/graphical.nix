@@ -152,7 +152,7 @@ in
             via = {
               name = "Via";
               genericName = "Keyboard configuration software";
-	      description = "Adjust keyboard mappings, macros, and settings"
+	      description = "Adjust keyboard mappings, macros, and settings";
               exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://usevia.app/"'';
               terminal = false;
               categories = [ "Application" ];
@@ -160,7 +160,7 @@ in
             fractal-adjust = {
               name = "Fractal Adjust";
               genericName = "Headphone configuration software";
-	      description = "Adjust Headphone settings"
+	      description = "Adjust Headphone settings";
               exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://adjust.fractal-design.com/"'';
               terminal = false;
               categories = [ "Application" ];
@@ -168,7 +168,7 @@ in
 	    keychron = {
 	      name = "Keychron Launcher";
 	      genericName = "Mouse configuration software";
-	      description = "Adjust mouse settings"
+	      description = "Adjust mouse settings";
               exec = ''flatpak run io.github.ungoogled_software.ungoogled_chromium --new-window --app="https://launcher.keychron.com/"'';
               terminal = false;
               categories = [ "Application" ];
