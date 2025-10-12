@@ -70,6 +70,7 @@ in
               # List package dependencies here
             ];
           })
+	  protonup-qt
         ];
 
         home.sessionVariables = {
