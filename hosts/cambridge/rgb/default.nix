@@ -37,7 +37,7 @@
     {
       description = "OpenRGB set all to '${colour}'";
       serviceConfig = {
-        ExecStart = ''sleep 5 && {pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
+        ExecStart = ''{pkgs.coreutils}/bin/sleep 5 && {pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
         Type = "oneshot";
       };
       wantedBy = [ "multi-user.target" ];

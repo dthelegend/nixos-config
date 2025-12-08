@@ -1,6 +1,8 @@
 {
   description = "NixOS Configurations for all daudi.dev infrastructure";
-
+  nixConfig = {
+    substituters = [];
+  };
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -30,16 +32,16 @@
     {
       nixosConfigurations = {
         cambridge = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             {
               nixpkgs.overlays = [
                 (final: prev: {
-                  config = {
-                    replaceStdenv = ({ pkgs }: prev.impureUseNativeOptimisations pkgs.clangStdenv);
+                  config = prev.config // {
+		    cudaSupport = true;
+		    replaceStdenv = ({ pkgs }: prev.impureUseNativeOptimisations pkgs.clangStdenv);
                   };
-		  nixpkgs.hostPlatform = {
+		  hostPlatform = {
 		    # The system will take many hours and run out of space to rebuild with native support
 			gcc.arch = "znver5";
 			clang.arch = "znver5";
@@ -60,7 +62,6 @@
           ];
         };
         minecraft-server = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             hosts.default_mixins
