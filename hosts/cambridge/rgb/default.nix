@@ -7,6 +7,7 @@
 }:
 
 {
+  boot.kernelModules = [ "i2c-dev" ];
   hardware.i2c.enable = true;
   services.hardware.openrgb = {
     package = pkgs.openrgb;
@@ -34,15 +35,11 @@
       openrgb_config = ./config;
     in
     {
-      wantedBy = [ "multi-user.target" ];
-      after = [
-        "network.target"
-        "lm_sensors.service"
-      ];
       description = "OpenRGB set all to '${colour}'";
       serviceConfig = {
-        ExecStart = ''${pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
+        ExecStart = ''sleep 5 && {pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
         Type = "oneshot";
       };
+      wantedBy = [ "multi-user.target" ];
     };
 }

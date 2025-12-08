@@ -14,6 +14,7 @@
     };
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -32,6 +33,23 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  config = {
+                    replaceStdenv = ({ pkgs }: prev.impureUseNativeOptimisations pkgs.clangStdenv);
+                  };
+		  nixpkgs.hostPlatform = {
+		    # The system will take many hours and run out of space to rebuild with native support
+			gcc.arch = "znver5";
+			clang.arch = "znver5";
+			gcc.tune = "znver5";
+			clang.tune = "znver5";
+ 			system = "x86_64-linux";
+ 		   };
+                })
+              ];
+            }
             overlays
             hosts.default_mixins
             hosts.cambridge

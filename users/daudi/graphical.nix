@@ -58,6 +58,11 @@ in
           wl-clipboard
           seahorse
 
+          # Code
+          jetbrains.rust-rover
+          rustup
+          clang
+
           # Flatpak
           flatpak
 
@@ -70,7 +75,7 @@ in
               # List package dependencies here
             ];
           })
-	  protonup-qt
+          protonup-qt
         ];
 
         home.sessionVariables = {
