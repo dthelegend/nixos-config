@@ -1,7 +1,7 @@
 {
   description = "NixOS Configurations for all daudi.dev infrastructure";
   nixConfig = {
-    substituters = [];
+    substituters = [ ];
   };
   inputs = {
     nixpkgs = {
@@ -34,24 +34,17 @@
         cambridge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  config = prev.config // {
-		    cudaSupport = true;
-		    replaceStdenv = ({ pkgs }: prev.impureUseNativeOptimisations pkgs.clangStdenv);
+            (
+              { lib, ... }:
+              {
+                nixpkgs = {
+                  config = {
+                    cudaSupport = true;
+                    replaceStdenv = ({ pkgs }: pkgs.impureUseNativeOptimizations pkgs.clangStdenv);
                   };
-		  hostPlatform = {
-		    # The system will take many hours and run out of space to rebuild with native support
-			gcc.arch = "znver5";
-			clang.arch = "znver5";
-			gcc.tune = "znver5";
-			clang.tune = "znver5";
- 			system = "x86_64-linux";
- 		   };
-                })
-              ];
-            }
+                };
+              }
+            )
             overlays
             hosts.default_mixins
             hosts.cambridge
