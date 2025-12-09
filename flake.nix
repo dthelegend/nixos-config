@@ -40,8 +40,8 @@
                 nixpkgs = {
                   config = {
                     cudaSupport = true;
-                    replaceStdenv = ({ pkgs }: pkgs.impureUseNativeOptimizations (pkgs.overrideCC pkgs.clangStdenv pkgs.llvmPackages_latest.clang));
-                  };
+                    replaceStdenv = ({ pkgs }: pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations pkgs.gccStdenv));
+		  };
                 };
               }
             )
