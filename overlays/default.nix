@@ -2,9 +2,10 @@
 
 {
   nixpkgs.overlays = [
-    (import ./busybox/default.nix)
-    (import ./pycparser)
+    (import ./busybox)
     (import ./cosmic-session)
     (import ./openrgb)
+    (import ./pycparser)
+    (import ./rustc)
   ];
 }
