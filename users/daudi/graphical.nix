@@ -91,9 +91,9 @@ in
 
         programs.git = {
           enable = true;
-          userName = "Daudi Wampamba";
-          userEmail = "me@daudi,dev";
-          extraConfig = {
+          settings = {
+            user.name = "Daudi Wampamba";
+            user.email = "me@daudi,dev";
             credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
             init.defaultBranch = "main";
             safe.directory = "*";

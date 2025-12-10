@@ -40,8 +40,15 @@
                 nixpkgs = {
                   config = {
                     cudaSupport = true;
-                    replaceStdenv = ({ pkgs }: (pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations (pkgs.useMoldLinker pkgs.gccStdenv))));
-		  };
+                    # replaceStdenv = ({ pkgs }: (pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations (pkgs.useMoldLinker pkgs.gccStdenv))));
+                    overlays = [
+                      (final: prev: {
+                        stdenv = prev.withCFlags "-pipe -O3" (
+                          prev.impureUseNativeOptimizations (prev.useMoldLinker prev.gccStdenv)
+                        );
+                      })
+                    ];
+                  };
                 };
               }
             )
