@@ -8,7 +8,7 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak = {
@@ -40,7 +40,7 @@
                 nixpkgs = {
                   config = {
                     cudaSupport = true;
-                    replaceStdenv = ({ pkgs }: pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations pkgs.gccStdenv));
+                    replaceStdenv = ({ pkgs }: (pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations (pkgs.useMoldLinker pkgs.gccStdenv))));
 		  };
                 };
               }
