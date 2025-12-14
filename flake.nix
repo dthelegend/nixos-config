@@ -1,14 +1,11 @@
 {
   description = "NixOS Configurations for all daudi.dev infrastructure";
-  nixConfig = {
-    substituters = [ ];
-  };
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:dthelegend/nixpkgs?ref=nixos-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/?ref=master";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak = {
@@ -34,24 +31,6 @@
         cambridge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            (
-              { lib, ... }:
-              {
-                nixpkgs = {
-                  config = {
-                    cudaSupport = true;
-                    # replaceStdenv = ({ pkgs }: (pkgs.withCFlags "-pipe -O3" (pkgs.impureUseNativeOptimizations (pkgs.useMoldLinker pkgs.gccStdenv))));
-                    overlays = [
-                      (final: prev: {
-                        stdenv = prev.withCFlags "-pipe -O3" (
-                          prev.impureUseNativeOptimizations (prev.useMoldLinker prev.gccStdenv)
-                        );
-                      })
-                    ];
-                  };
-                };
-              }
-            )
             overlays
             hosts.default_mixins
             hosts.cambridge

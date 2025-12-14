@@ -37,9 +37,14 @@
     {
       description = "OpenRGB set all to '${colour}'";
       serviceConfig = {
-        ExecStart = ''{pkgs.coreutils}/bin/sleep 5 && {pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
+        ExecStartPre = ''${pkgs.coreutils}/bin/sleep 5'';
+        ExecStart = ''${pkgs.openrgb}/bin/openrgb -vv --noautoconnect --config ${openrgb_config} --mode direct -c "${colour}"'';
         Type = "oneshot";
       };
       wantedBy = [ "multi-user.target" ];
+      after = [
+        "network.target"
+        "lm_sensors.service"
+      ];
     };
 }
