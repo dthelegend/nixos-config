@@ -60,7 +60,7 @@
             nix-flatpak = nix-flatpak;
           };
           modules = [
-            # overlays
+            overlays
             hosts.default-mixins
             hosts.milton-keynes
             users.daudi
