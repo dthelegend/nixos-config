@@ -8,7 +8,7 @@ in
 {
   inherit mixins;
 
-  default_mixins = (
+  default-mixins = (
     {
       ...
     }:
@@ -20,5 +20,6 @@ in
     }
   );
   cambridge = import ./cambridge;
+  milton-keynes = import ./milton-keynes;
   minecraft-server = import ./minecraft-server;
 }

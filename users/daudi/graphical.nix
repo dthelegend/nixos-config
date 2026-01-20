@@ -2,7 +2,8 @@
   config,
   pkgs,
   lib,
-  inputs,
+  home-manager,
+  nix-flatpak,
   ...
 }:
 let
@@ -13,12 +14,11 @@ in
     graphical = lib.mkEnableOption "Enable graphical features";
   };
 
-  imports = with inputs; [
+  imports = [
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs.flake-inputs = inputs;
       home-manager.users.daudi.imports = [
         nix-flatpak.homeManagerModules.nix-flatpak
       ];
@@ -33,6 +33,8 @@ in
       layout = "us";
       variant = "";
     };
+
+    services.flatpak.enable = true;
 
     programs.gamemode.enable = true;
 
@@ -59,7 +61,7 @@ in
           seahorse
 
           # Code
-          jetbrains.rust-rover
+          (jetbrains.rust-rover.override { forceWayland = true; })
           rustup
           clang
 
