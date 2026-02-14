@@ -37,6 +37,7 @@ in
     services.flatpak.enable = true;
 
     programs.gamemode.enable = true;
+    programs.gamescope.enable = true;
 
     programs.steam = {
       enable = true;
@@ -72,12 +73,15 @@ in
           prismlauncher
 
           # Gaming
-          (lutris.override {
-            extraPkgs = pkgs: [
-              # List package dependencies here
-            ];
+	  (heroic.override {
+  	      extraPkgs = pkgs: [
+              pkgs.gamescope
+	      pkgs.gamemode
+  	    ];
           })
           protonup-qt
+	  nvtopPackages.full
+	  bottom
         ];
 
         home.sessionVariables = {

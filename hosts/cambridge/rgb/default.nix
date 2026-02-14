@@ -31,7 +31,7 @@
 
   systemd.services.initialise_rgb =
     let
-      colour = "red";
+      colour = "9711FE";
       openrgb_config = ./config;
     in
     {
