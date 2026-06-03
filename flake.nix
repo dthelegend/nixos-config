@@ -2,7 +2,7 @@
   description = "NixOS Configurations for all daudi.dev infrastructure";
   inputs = {
     nixpkgs = {
-      url = "github:dthelegend/nixpkgs?ref=nixos-unstable";
+      url = "github:dthelegend/nixpkgs/nixos-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/";

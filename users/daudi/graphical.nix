@@ -37,7 +37,13 @@ in
     services.flatpak.enable = true;
 
     programs.gamemode.enable = true;
-    programs.gamescope.enable = true;
+    programs.gamescope = {
+    	enable = true;
+	capSysNice = false;
+    };
+    environment.systemPackages = with pkgs; [
+        gamescope-wsi
+    ];
 
     programs.steam = {
       enable = true;
