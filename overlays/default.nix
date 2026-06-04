@@ -4,6 +4,7 @@
   nixpkgs.overlays = [
     (import ./buf)
     (import ./gsl)
+    (import ./keyutils)
     (import ./linux-firmware)
     (import ./lib2geom)
     (import ./libsecret)

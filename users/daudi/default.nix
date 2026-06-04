@@ -5,10 +5,6 @@
   modulesPath,
   ...
 }:
-
-let
-  cfg = config.users.daudi;
-in
 {
   imports = [
     ./graphical.nix
@@ -26,6 +22,10 @@ in
         ];
       };
       defaultUserShell = pkgs.fish;
+    };
+
+    environment.variables = {
+      NIXPKGS_ALLOW_UNFREE = "1";
     };
   };
 }

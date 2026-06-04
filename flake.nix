@@ -2,7 +2,7 @@
   description = "NixOS Configurations for all daudi.dev infrastructure";
   inputs = {
     nixpkgs = {
-      url = "github:dthelegend/nixpkgs/nixos-unstable";
+      url = "nixpkgs/nixos-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/";
@@ -20,10 +20,10 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       home-manager,
       nix-flatpak,
       nix-minecraft,
+      nixpkgs
     }:
     with (import ./.);
     {
