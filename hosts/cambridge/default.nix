@@ -24,4 +24,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  # Cambridge builds locally and must not use accra cache or remote builders
+  custom.useLocalCache = false;
 }

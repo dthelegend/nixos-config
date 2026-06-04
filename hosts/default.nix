@@ -3,6 +3,7 @@ let
     ssh-support = ./ssh-support.nix;
     default-system = ./default-system.nix;
     nix-config = ./nix-config.nix;
+    cache-client = ./cache-client.nix;
   };
 in
 {
@@ -16,10 +17,13 @@ in
       imports = with mixins; [
         default-system
         nix-config
+        cache-client
       ];
     }
   );
   cambridge = import ./cambridge;
   milton-keynes = import ./milton-keynes;
-  minecraft-server = import ./minecraft-server;
+  dar-es-salaam = import ./dar-es-salaam;
+  accra = import ./accra;
+  dallas = import ./dallas;
 }
