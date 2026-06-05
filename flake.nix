@@ -5,7 +5,7 @@
       url = "nixpkgs/nixos-unstable";
     };
     nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/nixos-25.11";
+      url = "github:nixos/nixpkgs/nixos-26.05";
     };
     home-manager = {
       url = "github:nix-community/home-manager/";
