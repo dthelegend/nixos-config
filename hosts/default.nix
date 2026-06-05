@@ -26,4 +26,5 @@ in
   dar-es-salaam = import ./dar-es-salaam;
   accra = import ./accra;
   dallas = import ./dallas;
+  nottingham = import ./nottingham;
 }

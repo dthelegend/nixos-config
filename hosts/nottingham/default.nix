@@ -5,12 +5,11 @@
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ../lxc-restriction.nix
     ./connectivity.nix
-    ./mc-server.nix
+    ./forgejo.nix
   ];
 
   # Platform Architecture
   nixpkgs.hostPlatform = "x86_64-linux";
-  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";
 }

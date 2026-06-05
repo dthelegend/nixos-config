@@ -92,7 +92,7 @@
             users.daudi
           ];
         };
-        dallas = nixpkgs-stable.lib.nixosSystem {
+         dallas = nixpkgs-stable.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             nix-flatpak = nix-flatpak;
@@ -105,7 +105,20 @@
             hosts.dallas
             users.daudi
           ];
-        };
+         };
+         nottingham = nixpkgs-stable.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            nix-flatpak = nix-flatpak;
+            home-manager = home-manager-stable;
+          };
+          modules = [
+            hosts.default-mixins
+            hosts.mixins.ssh-support
+            hosts.nottingham
+            users.daudi
+          ];
+         };
       };
     };
 }

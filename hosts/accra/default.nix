@@ -3,6 +3,7 @@
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+    ../lxc-restriction.nix
     ./connectivity.nix
   ];
 

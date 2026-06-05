@@ -25,5 +25,11 @@
       gateway = "192.168.1.1";
       interface = "eth0";
     };
+    nottingham = {
+      ip = "192.168.1.50";
+      prefixLength = 24;
+      gateway = "192.168.1.1";
+      interface = "eth0";
+    };
   };
 }

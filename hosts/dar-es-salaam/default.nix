@@ -62,9 +62,11 @@
   # Disable resolved stub listener to free port 53 for crab-hole
   services.resolved = {
     enable = true;
-    extraConfig = ''
-      DNSStubListener=no
-    '';
+    settings = {
+      Resolve = {
+        DNSStubListener = "no";
+      };
+    };
   };
 
   system.stateVersion = "25.11";
